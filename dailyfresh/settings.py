@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django
+DJANGO_DIR =os.path.dirname(os.path.dirname(os.path.abspath(django.__file__)))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'apps.cart',
     'apps.order',
     'apps.goods',
+
 ]
 
 MIDDLEWARE = [
@@ -59,7 +62,8 @@ ROOT_URLCONF = 'dailyfresh.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,"templates")],
+        'DIRS': [os.path.join(BASE_DIR,"templates"),
+                 os.path.join(DJANGO_DIR + r'/django/contrib/admin', 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,7 +88,7 @@ DATABASES = {
         'NAME': 'dailyfresh',
         'USER': 'root',
         'PASSWORD': 'yang',
-        'HOST': '192.168.1.106',
+        'HOST': '192.168.1.103',
         'PORT': '3306',
     }
 }
@@ -129,7 +133,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,"static"),
+#                     os.path.join(DJANGO_DIR, "static"),]
+STATIC_ROOT = [os.path.join(BASE_DIR, 'static'),]
+
+
 
 TINYMCE_DEFAULT_CONFIG = {
     'THEME':'advanced',
