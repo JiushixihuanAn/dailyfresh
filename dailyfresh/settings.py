@@ -158,3 +158,18 @@ EMAIL_HOST_PASSWORD = 'GZYFFOCECLFCHTII'
 #收件人看到的发件人
 EMAIL_FROM = '天天生鲜<yangxiufeng1996@163.com>'
 
+#Django 的缓存配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# 配置session存储
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
